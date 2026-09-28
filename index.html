@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CardVault — Secure Tokenization Demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main>
+    <header><span class="logo">CV</span><div><p class="eyebrow">AES-256-GCM</p><h1>CardVault</h1><p>Local card tokenization and authenticated encryption demo.</p></div></header>
+    <aside><strong>Use test numbers only.</strong> Never enter a real payment card. Raw card numbers are not stored or logged.</aside>
+    <section class="grid">
+      <article class="card">
+        <h2>Tokenize test card</h2>
+        <label for="pan">Test card number</label>
+        <input id="pan" inputmode="numeric" autocomplete="off" maxlength="23" placeholder="4242 4242 4242 4242">
+        <p class="hint">Validated with the Luhn algorithm.</p>
+        <button id="tokenize">Encrypt & create token</button>
+        <div class="result" id="token-result" hidden><span>Masked card</span><strong id="masked"></strong><span>Token</span><code id="token"></code></div>
+      </article>
+      <article class="card">
+        <h2>Decrypt by token</h2>
+        <label for="lookup">Token</label>
+        <input id="lookup" autocomplete="off" placeholder="tok_…">
+        <p class="hint">For demonstration on this computer only.</p>
+        <button id="reveal">Decrypt test card</button>
+        <div class="result" id="reveal-result" hidden><span>Decrypted test number</span><code id="revealed"></code></div>
+      </article>
+    </section>
+    <section class="card stored"><h2>Stored tokens</h2><div id="cards"><p class="hint">No tokens created yet.</p></div></section>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
